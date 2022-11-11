@@ -38,17 +38,16 @@ public class TestCreateCourierWithoutData {
         assertEquals("Недостаточно данных для создания учетной записи", responseMessage);
     }
 
-//    @Test
-//    @Description("тест падает из-за бага в создании курьера без имени")
-//    @Step("Create new courier without name")
-//    public void courierWithoutNameCanNotBeCreated(){
-//        Courier courier = CourierGenerator.getCourierWithoutName();
-//        ValidatableResponse responseCreate = courierClient.create(courier);
-//        int actualStatusCodeCreate = responseCreate.extract().statusCode();
-//        String responseMessage = responseCreate.extract().path("message");
-//        // тест падает из-за бага в создании курьера без имени
-//        assertEquals(400, actualStatusCodeCreate);
-//        assertEquals("Недостаточно данных для создания учетной записи", responseMessage);
-//    }
+    @Test
+    @Step("Create new courier without name")
+    public void courierWithoutNameCanNotBeCreated(){
+        Courier courier = CourierGenerator.getCourierWithoutName();
+        ValidatableResponse responseCreate = courierClient.create(courier);
+        int actualStatusCodeCreate = responseCreate.extract().statusCode();
+        String responseMessage = responseCreate.extract().path("message");
+        // тест падает из-за бага в создании курьера без имени
+        assertEquals(400, actualStatusCodeCreate);
+        assertEquals("Недостаточно данных для создания учетной записи", responseMessage);
+    }
 
 }

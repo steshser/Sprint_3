@@ -1,3 +1,5 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
@@ -47,7 +49,11 @@ public class TestCreateOrder {
         int actualStatusCodeCreate = responseCreate.extract().statusCode();
         actualTruckNumber = responseCreate.extract().path("track");
         assertEquals(201, actualStatusCodeCreate);
-        assertNotNull(actualTruckNumber);
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        OrderCreateResponse orderCreateResponse = responseCreate.extract().body().as(OrderCreateResponse.class);
+        String responseBody = gson.toJson(orderCreateResponse);
+        assertTrue(responseBody.contains("track"));
+
     }
 
     @After
